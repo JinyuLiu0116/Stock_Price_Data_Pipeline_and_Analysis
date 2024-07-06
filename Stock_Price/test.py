@@ -3,8 +3,8 @@ import pandas as pd
 print(pd.__version__)
 
 #Create and Activate a Virtual Environment:
-#open terminal type in:
-#python -m venv venv
+#open terminal type in:python -m venv venv
+
 #Activate the virtual environment:
 #On Windows:.\venv\Scripts\activate
 #On macOS:source venv/bin/activate
