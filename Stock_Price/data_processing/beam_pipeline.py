@@ -1,21 +1,32 @@
 import apache_beam as beam
-from apache_beam.options.pipline_options import PiplelineOptions 
-#also we need to install 'requests' library this is requisted library along with apache-beam library
-#Using the requests library in Apache Beam allows you to integrate external web services and APIs
-#seamlessly into your data processing workflows, enabling rich and dynamic data interactions.
 import requests
-import json
+import csv
 
-#define a function to fetch stock data
-def fetch_stock_data(symbol, api_key):
-  url=f'https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv'
-  respones = requests.get(url)
-  if respones.status_code=200:
-    data=respones.json()
-    return json.dumps(data)
-  else:
-    return None
-#The symbol and api_key parameters are passed to the function
-#The url string is constructed using an f-string, which replaces {symbol} with the actual stock symbol and {api_key} with your actual API key
-#The constructed URL is used to make the request to the Alpha Vantage API, and the response is processed accordingly.
+#function to fetch CSV data from URL
+def fetch_csv_data(url):
+  response = resquests.get(url)
+  response.raise_for_status() # ensure got a successful response
+  return response.text
+  
+#Define a function to parse CSV rows
+def parse_csv(line):
+  return dict(zip(row.keys(), row))
 
+#URL of the CSV file
+url='https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv'
+
+# Fetch the CSV data from the URL
+csv_data = fetch_csv_data(url)
+
+#Define the pipeline
+with beam.Pipeline() as pipeline:
+  #read data from the CSV file
+  lines = (
+    pipeline
+    |'Creat CSV data' >> beam.Create(csv_data.splitlines()[1:]) # to skip the header
+    |'Parse CSV' >> beam.map(lambda line: next(csv.DictReader([line])))
+    |'Formart as dictionary' >> beam.Map(parse_csv_line)
+    | beam.io.WriteToText('output.txt')
+  )
+  # run the pipeline
+pipeline.run().wait_until_finish()
