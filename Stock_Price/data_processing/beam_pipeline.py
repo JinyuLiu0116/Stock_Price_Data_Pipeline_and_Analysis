@@ -10,7 +10,7 @@ def fetch_csv_data(url):
   
 #Define a function to parse CSV rows
 def parse_csv(line):
-  return dict(zip(row.keys(), row))
+  return dict(zip(line.keys(), line))
 
 #URL of the CSV file
 url='https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv'
