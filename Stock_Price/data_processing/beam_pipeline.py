@@ -1,4 +1,4 @@
-import apache-beam as beam
+import apache_beam as beam
 from apache_beam.options.pipline_options import PiplelineOptions 
 #also we need to install 'requests' library this is requisted library along with apache-beam library
 #Using the requests library in Apache Beam allows you to integrate external web services and APIs
