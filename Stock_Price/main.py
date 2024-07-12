@@ -1,3 +1,5 @@
+
+#This is the code I copy from online source, it has many advance features, we only need to foucs on what we need.
 import numpy as np
 import pandas as pd
 #pip install tensorflow
