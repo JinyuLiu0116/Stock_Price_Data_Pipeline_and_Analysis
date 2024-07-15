@@ -27,7 +27,7 @@ class ParseAndFormatData(beam.DoFn): # this class is to parses the stock data an
   # The process method will be called for each element in the input PCollection.
   def process(self, element): # The process method takes self (the instance of the class) and element (an input element from the PCollection) as arguments
     # This line retrieves the value associated with the key 'Time Series (3min)' from the element dictionary
-    time_series = element.get('Time Series (3min)',{}) #If the key is not found, it returns an empty dictionary {}.
+    time_series = element.get('Time Series (5min)',{}) #If the key is not found, it returns an empty dictionary {}.
     formatted_data = [] # !!important!! This initializes an empty list named formatted_data to store the formatted stock price data.
     # This for loop iterates over each item in the time_series dictionary.
     for timestamp, values in time_series.items(): # timestamp is the key, representing the time of the stock price data.
@@ -74,15 +74,15 @@ def run():
   options = PipelineOptions()
   with beam.Pipeline(options = options) as p:
     (p
-     | 'Read symbols' >> beam.Create(['AAPL','GOOGL','WFC','AMZ','META'])
+     | 'Read symbols' >> beam.Create([('APPL'), ('WFC'),('IBM')])
      | 'Fetch stock prices' >> beam.ParDo(FetchStockPrice())
      | 'Parse and format data' >> beam.ParDo(ParseAndFormatData())
-     | 'Write to MySQL' >> beam.ParDo(WriteToMySQL( #if this line code do not work, we can ask professor
-             host='our_mysql_host',
-             database='the_database',
-             user='the_username',
-             password='the_password'
+     | 'Write to MySQL' >> beam.ParDo(WriteToMySQL(
+             host='127.0.0.1',
+             database='Stock_Price',
+             user='root',
+             password='root'
          )))
-    
+
 if __name__ == '__main__':
     run()
