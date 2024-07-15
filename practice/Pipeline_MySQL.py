@@ -16,7 +16,7 @@ class FetchStockPrice(beam.DoFn):
   def process(self, element):
     symbol = element
     api_key = '2jAIXI9Kte2V8N3EhXT6LPOoUwe_5tfkKxgyeHxSw8rA7DNPg'
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={api_key}'
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={api_key}'
     response = requests.get(url)
     data = response.json()
     return [data]
