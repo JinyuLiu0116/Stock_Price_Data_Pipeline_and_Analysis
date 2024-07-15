@@ -1,3 +1,6 @@
+#use API for real time stock price
+# fetch stock data from source and format them, and then send to MySQL database
+# need to create a brench in MySQL to store these data
 import requests
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
