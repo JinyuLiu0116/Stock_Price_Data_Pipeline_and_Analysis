@@ -1,6 +1,8 @@
 #use API for real time stock price
 # fetch stock data from source and format them, and then send to MySQL database
 # need to create a brench in MySQL to store these data
+# the next step is add apache-airflow to schedule the time from Monday to Friday, between the time that stock markt open and close
+# last step analysis and visualize the data by using pandas and matplotlib libraries
 import requests
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
