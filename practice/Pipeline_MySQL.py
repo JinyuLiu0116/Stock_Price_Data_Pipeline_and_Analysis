@@ -3,6 +3,8 @@
 # need to create a brench in MySQL to store these data
 # the next step is add apache-airflow to schedule the time from Monday to Friday, between the time that stock markt open and close
 # last step analysis and visualize the data by using pandas and matplotlib libraries
+!pip install apache_beam
+!pip install mysql_connector_python
 
 #  We are doing ETL !! extract -> transform -> store
 import requests
