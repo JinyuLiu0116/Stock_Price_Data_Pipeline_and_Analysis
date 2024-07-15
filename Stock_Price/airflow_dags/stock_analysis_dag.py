@@ -28,8 +28,8 @@ dag = DAG(
     default_args = default_args,
     dag_id="dag_name",
     schedule_interval='@once', 
-    catchup=False
-    description='First test code'
+    catchup=False,
+    description='First test code',
 )
 
 #Lists of tasks (work in progress) [task_id we put in the correct etl file]
