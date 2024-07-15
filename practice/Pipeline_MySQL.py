@@ -6,7 +6,7 @@
 import requests
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
-from apache_beam.io.jdbc import WriteToJdbc
+from apache_beam.io.jdbc import WriteToMySQL
 import json
 import mysql.connector
 
