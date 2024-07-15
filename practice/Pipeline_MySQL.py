@@ -72,7 +72,7 @@ def run():
      | 'Read symbols' >> beam.Create(['AAPL','GOOGL','WFC','AMZ','META'])
      | 'Fetch stock prices' >> beam.ParDo(FetchStockPrice())
      | 'Parse and format data' >> beam.ParDo(ParseAndFormatData())
-     | 'Write to MySQL' >> beam.ParDo(WriteToMySQL(
+     | 'Write to MySQL' >> beam.ParDo(WriteToMySQL( #if this line code do not work, we can ask professor
              host='our_mysql_host',
              database='the_database',
              user='the_username',
