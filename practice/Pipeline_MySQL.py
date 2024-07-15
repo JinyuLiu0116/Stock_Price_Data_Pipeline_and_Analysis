@@ -8,7 +8,7 @@
 import requests
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
-from apache_beam.io.jdbc import WriteToMySQL
+#from apache_beam.io.jdbc import WriteToMySQL we do not need this one, we use beam.ParDo instead
 import json
 import mysql.connector
 
