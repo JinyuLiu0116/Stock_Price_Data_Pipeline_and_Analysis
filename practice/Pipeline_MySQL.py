@@ -18,7 +18,8 @@ class FetchStockPrice(beam.DoFn): # this class drived from beam.DoFn(Do function
   def process(self, element): # The method that gets called for each element in the input PCollection (a collection of data elements).
     symbol = element  # Represents a stock symbol
     api_key = '2jAIXI9Kte2V8N3EhXT6LPOoUwe_5tfkKxgyeHxSw8rA7DNPg'  #t the key we got from API class
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={api_key}' 
+    url = f'https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv?token=GHSAT0AAAAAACTVWJPIUNVLSX6UIHC66GMCZUYAHBQ/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&apikey={api_key}'
+    #url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={api_key}' 
     response = requests.get(url)
     data = response.json()  # Makes a request to the API and returns the JSON response as a list containing the data.
     return [data]
