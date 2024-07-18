@@ -1,50 +1,58 @@
-import apache-airflow
-
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from airflow.operators.empty import EmptyOperator
+from airflow.utils.dates import days_ago
+from datetime import datetime
+import requests
+import os
 
-#Creating a DAG (Directed Acyclic Graph)
-with DAG(
-    dag_id="dag_name",
-    start_date=datetime.datetime(2024, 1, 1),
-    schedule="@daily",
-);
-#The schedule we can change it to daily, weekly, etc.
+def API():
+    print('Testing API')
 
-EmptyOperator(task_id="task", dag=my_dag)
+def pipeline():
+    print('Testing pipeline')
 
+def database():
+    print('Testing database')
 
 
-#Default Constructors
-default_args = {
-    'owner': 'airflow',
-    'start_date': datetime(2024, 1, 1),
-    'stock_price': 132;
-}
-
-#Create DAG Object
 dag = DAG(
-    default_args = default_args,
-    dag_id="dag_name",
-    schedule_interval='@once', 
-    catchup=False,
-    description='First test code',
+    'My_First_DAG',
+    default_args={'start_date': days_ago(1)},
+    schedule_interval='30 9 * * 1-5',
+    catchup=False
 )
 
-#Lists of tasks (work in progress) [task_id we put in the correct etl file]
+print_API_task = PythonOperator(
+    task_id='API',
+    python_callable=API,
+    dag=dag
+)
 
-first_task = PythonOperator(
-    task_id='unknown_etl',
-    python_callable=run_unknown_etl,
-    dag=dag,
+print_pipeline_task = PythonOperator(
+    task_id='pipeline',
+    python_callable=pipeline,
+    dag=dag
+)
+
+print_database_task = PythonOperator(
+    task_id='database',
+    python_callable=database,
+    dag=dag
 )
 
 
-#Task Sequence (Below)
-
-first_task >> [second_task, third_task]
-[second_task, third_task] >> fourth_task
+# Set the dependencies between the tasks
+print_API_task >> print_pipeline_task >> print_database_task
 
 
+# Extra notes:
+# 
+# 
+# We can use requests to collect data from links [via requests]
+# response = requests.get('https://api.quotable.io/random')
+# quote = response.json()['content']
+# print('Quote of the day: "{}"'.format(quote))
+#
+#
+#
 
