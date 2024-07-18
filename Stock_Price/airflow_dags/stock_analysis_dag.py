@@ -22,7 +22,7 @@ dag = DAG(
     catchup=False
 )
 
-print_API_task = PythonOperator(
+print_yahooAPI_task = PythonOperator(
     task_id='yahooAPI',
     python_callable=yahooAPI,
     dag=dag
@@ -42,7 +42,7 @@ print_database_task = PythonOperator(
 
 
 # Set the dependencies between the tasks
-print_API_task >> print_pipeline_task >> print_database_task
+print_yahooAPI_task >> print_pipeline_task >> print_database_task
 
 
 # Extra notes:
