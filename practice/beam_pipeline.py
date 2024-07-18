@@ -24,7 +24,7 @@ class ReadFromCSV(beam.DoFn):#reading data from csv file
                             'close':element['close'],
                             'volume':element['volume'],
                         }
-                        return [formatted_data]#return  the formatted datat as list
+                        return [formatted_data]#return  the formatted data as list
 
                     class WriteToMySQL(beam.DoFn):
                         def __init__(self,host,database,user,password):#database connection parameters
@@ -33,7 +33,7 @@ class ReadFromCSV(beam.DoFn):#reading data from csv file
                             self.user=user
                             self.password=password 
 
-                            def start_bundle(self): #this method establish a connection to the Mysql database and prepare an inser statement before processing data
+                            def start_bundle(self): #this method establish a connection to the Mysql database and prepare an insert statement before processing data
                             
                                 self.connection=mysql.connector.connect(  #connects to the mysql database
                                     host=self.host,
@@ -60,7 +60,7 @@ class ReadFromCSV(beam.DoFn):#reading data from csv file
                                                 file_path="https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv?token=GHSAT0AAAAAACUKGJGDABWDBMJGQ5RGBEZIZUYTE3A"
                                                 
                                                 options=PipelineOptions()
-                                                with beam.Pipeline( options= options) as p:#create and run hte pipeline
+                                                with beam.Pipeline( options= options) as p:#create and run the pipeline
                                                     (
                                                         p
                                                         |'start'>>beam.create([None])#start the pipleine
