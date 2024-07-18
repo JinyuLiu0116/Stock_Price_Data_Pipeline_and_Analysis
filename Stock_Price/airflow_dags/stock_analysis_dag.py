@@ -16,7 +16,7 @@ def database():
 
 
 dag = DAG(
-    'My_First_DAG',
+    'Stock-Price',
     default_args={'start_date': days_ago(1)},
     schedule_interval='30 9 * * 1-5',
     catchup=False
