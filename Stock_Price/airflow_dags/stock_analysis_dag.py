@@ -5,8 +5,8 @@ from datetime import datetime
 import requests
 import os
 
-def API():
-    print('Testing API')
+def yahooAPI():
+    print('Testing Yahoo API')
 
 def pipeline():
     print('Testing pipeline')
@@ -23,8 +23,8 @@ dag = DAG(
 )
 
 print_API_task = PythonOperator(
-    task_id='API',
-    python_callable=API,
+    task_id='yahooAPI',
+    python_callable=yahooAPI,
     dag=dag
 )
 
