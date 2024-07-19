@@ -79,10 +79,10 @@ def run():
      | 'Fetch stock prices' >> beam.ParDo(FetchStockPrice())
      | 'Parse and format data' >> beam.ParDo(ParseAndFormatData())
      | 'Write to MySQL' >> beam.ParDo(WriteToMySQL(
-             host='127.0.0.1',
-             database='Stock_Price',
+             host='3306',
+             database='localhost',
              user='root',
-             password='root'
+             password='8551649'
          )))
 
 if __name__ == '__main__':
