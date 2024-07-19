@@ -5,8 +5,8 @@ from datetime import datetime
 import requests
 import os
 
-def yahooAPI():
-    print('Testing Yahoo API')
+def testAPI():
+    print('Testing API')
 
 def pipeline():
     print('Testing pipeline')
@@ -22,9 +22,9 @@ dag = DAG(
     catchup=False
 )
 
-print_yahooAPI_task = PythonOperator(
-    task_id='yahooAPI',
-    python_callable=yahooAPI,
+print_testAPI_task = PythonOperator(
+    task_id='testAPI',
+    python_callable=testAPI,
     dag=dag
 )
 
@@ -42,7 +42,7 @@ print_database_task = PythonOperator(
 
 
 # Set the dependencies between the tasks
-print_yahooAPI_task >> print_pipeline_task >> print_database_task
+print_testAPI_task >> print_pipeline_task >> print_database_task
 
 
 # Extra notes:
