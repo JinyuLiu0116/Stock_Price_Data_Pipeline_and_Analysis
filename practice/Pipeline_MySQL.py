@@ -19,7 +19,7 @@ class FetchStockPrice(beam.DoFn): # this class drived from beam.DoFn(Do function
     symbol = element  # Represents a stock symbol
     api_key = '2jAIXI9Kte2V8N3EhXT6LPOoUwe_5tfkKxgyeHxSw8rA7DNPg'  #t the key we got from API class
     #url = f'https://raw.githubusercontent.com/JinyuLiu0116/Stock_Price_Data_Pipeline_and_Analysis/main/daily_IBM.csv?token=GHSAT0AAAAAACTVWJPIUNVLSX6UIHC66GMCZUYAHBQ/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={api_key}'
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=5min&apikey={api_key}' 
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={api_key}' 
     response = requests.get(url)
     data = response.json()  # Makes a request to the API and returns the JSON response as a list containing the data.
     return [data]
@@ -28,7 +28,7 @@ class ParseAndFormatData(beam.DoFn): # this class is to parses the stock data an
   # The process method will be called for each element in the input PCollection.
   def process(self, element): # The process method takes self (the instance of the class) and element (an input element from the PCollection) as arguments
     # This line retrieves the value associated with the key 'Time Series (3min)' from the element dictionary
-    time_series = element.get('Time Series (5min)',{}) #If the key is not found, it returns an empty dictionary {}.
+    time_series = element.get('Time Series (1min)',{}) #If the key is not found, it returns an empty dictionary {}.
     formatted_data = [] # !!important!! This initializes an empty list named formatted_data to store the formatted stock price data.
     # This for loop iterates over each item in the time_series dictionary.
     for timestamp, values in time_series.items(): # timestamp is the key, representing the time of the stock price data.
