@@ -1,19 +1,25 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.mysql_operator import MySqlOperator
 from airflow.utils.dates import days_ago
 from datetime import datetime
 import requests
 import os
 
-def testAPI():
-    print('Testing API')
+# Tasks + Functions currently only print Strings as I do not have the knowledge on how
+# to create tasks that connect to other tools such as MySQL, etc. to control the schedule of tasks.
+
+def stockAPI():
+    print('Testing Stock API')
+
+def extractAPI():
+    print('Extracting API test')
 
 def pipeline():
     print('Testing pipeline')
 
 def database():
     print('Testing database')
-
 
 dag = DAG(
     'Stock-Price',
@@ -22,9 +28,15 @@ dag = DAG(
     catchup=False
 )
 
-print_testAPI_task = PythonOperator(
-    task_id='testAPI',
-    python_callable=testAPI,
+print_stockAPI_task = PythonOperator(
+    task_id='testStockAPI',
+    python_callable=stockAPI,
+    dag=dag
+)
+
+print_extractAPI_task = PythonOperator(
+    task_id='extractAPI',
+    python_callable=extractAPI,
     dag=dag
 )
 
@@ -41,18 +53,28 @@ print_database_task = PythonOperator(
 )
 
 
+
+
 # Set the dependencies between the tasks
-print_testAPI_task >> print_pipeline_task >> print_database_task
+print_stockAPI_task >> print_extractAPI_task >> print_pipeline_task >> print_database_task
 
 
-# Extra notes:
-# 
-# 
-# We can use requests to collect data from links [via requests]
+# Extra Optional notes:
+
+# We can use requests to collect data from links [via requests] if needed
+
 # response = requests.get('https://api.quotable.io/random')
 # quote = response.json()['content']
 # print('Quote of the day: "{}"'.format(quote))
-#
-#
-#
+
+
+# I tried to use MySqlOperator as part of the tasks/functions but it does not work with my limited knowledge and time:
+# It was specifically the mysql_conn_id and the sql lines that I do not have the knowledge to make it work.
+
+# execute_query = MySqlOperator(
+#    task_id='execute_sql',
+#    sql='SELECT * FROM wellsfargo.yahoo_api LIMIT 10;',
+#    mysql_conn_id='mysql_default', # The ID of the MySQL connection you configured
+#    dag=dag,
+# )
 
