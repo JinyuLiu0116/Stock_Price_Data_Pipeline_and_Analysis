@@ -9,15 +9,17 @@ pandas_dataframe = pd.read_sql_table('crwd', engine)
 
 # use pandas to analys data
  
- # The over view of 'CRWD' price data
-print(pandas_dataframe)
-
- # To view the first 5 rows of data
-print(pandas_dataframe.head(5))
-
  # To view the last 5 rows of data
 print(pandas_dataframe.tail(5))
 
+ # To see the change of price
+CRWD_close=pandas_dataframe['Close']
+CRWD_return=np.log(CRWD_close).diff()
+print(CRWD_return.tail(10))
+
  # To view the data from the 'Close' column
 print(pandas_dataframe['Close'].tail(10))
- # This data on price changes is what we want to analyze.
+
+ # To see describe of the data we want to analysis
+CRWD_close=CRWD_close.tail(10)
+print(CRWD_close.describe())
