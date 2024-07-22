@@ -13,6 +13,18 @@ CREATE TABLE time_table (
     time_id INT AUTO_INCREMENT PRIMARY KEY,
     time TIME UNIQUE
 );
+CREATE TABLE stock_data (
+    date_id INT,
+    time_id INT,
+    stock VARCHAR(45),
+    open DECIMAL(10,4),
+    high DECIMAL(10,4),
+    low DECIMAL(10,4),
+    close DECIMAL(10,4),
+    volume INT,
+    FOREIGN KEY(date_id) REFERENCES date_table(date_id),
+    FOREIGN KEY(date_id) REFERENCES date_table(date_id)
+);
 
 -- Insert record into tables --
 INSERT INTO date_table (date)
