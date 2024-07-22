@@ -57,6 +57,9 @@ if __name__ == "__main__":
     else:
         print("Failed to fetch and save data as CSV.")
 
+import apache_beam as beam
+from apache_beam.options.pipeline_options import PipelineOptions
+import pandas as pd
 
         def split_row(row):
     return row.split(',')
