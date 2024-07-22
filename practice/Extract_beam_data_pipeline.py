@@ -81,7 +81,7 @@ def run(input_csv, output_csv):
 
 if __name__ == "__main__":
     api_url = 'https://www.alphavantage.co/query'
-    api_key = '2GZY18LXLN2C5SVW'
+    api_key = '2jAIZCO9TtAToc1G9qAbS3Sd08K_4ua142296hvViJoeQcjE'
     stock_symbol = 'CRWD'
     csv_filename = 'crdwstock_data.csv'
     interval = '15min'
