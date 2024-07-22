@@ -6,10 +6,10 @@ from apache_beam.options.pipeline_options import PipelineOptions
 
 def apidata_into_csv(api_url, api_key, stock_symbol, csv_filename, interval='15min'):
     params = {
-        'function': 'TIME_SERIES_INTRADAY',
-        'apikey': api_key,
-        'symbol': stock_symbol,
-        'interval': interval,
+        function': 'TIME_SERIES_INTRADAY',
+        'apikey': '2jAIZCO9TtAToc1G9qAbS3Sd08K_4ua142296hvViJoeQcjE',
+        'symbol': 'CRWD', #WFC, MSFT
+        'interval': '15min',
         'outputsize': 'full'
     }
 
