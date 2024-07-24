@@ -6,7 +6,7 @@ from datetime import datetime
 import requests
 import os
 
-# Tasks + Functions currently only print Strings as I do not have the knowledge on how
+# Tasks + Functions currently only print Strings as Python Operators as I do not have the knowledge on how
 # to create tasks that connect to other tools such as MySQL, etc. to control the schedule of tasks.
 
 def stockAPI():
@@ -27,6 +27,7 @@ dag = DAG(
     schedule_interval='30 9 * * 1-5',
     catchup=False
 )
+# the schedule interval is cron coded into "minutes, hours, days, months, and then certain weekdays/weekends (with 0 Sunday and 6 at Saturday)".
 
 print_stockAPI_task = PythonOperator(
     task_id='testStockAPI',
