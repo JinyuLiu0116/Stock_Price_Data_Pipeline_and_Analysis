@@ -6,8 +6,6 @@ from sqlalchemy import create_engine
 #connect to MySQL database
 engine = sqlalchemy.create_engine('mysql+pymysql://root:8551649@localhost:3306/stock_data')
 # use pandas read data from MySQL stock table
-pandas_dataframe = pd.read_sql_table('crwd', engine)
-
 df = pd.read_sql_table('crwd', engine)
 #over view of data
 print(df)
