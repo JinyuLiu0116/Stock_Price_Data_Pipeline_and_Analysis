@@ -7,10 +7,11 @@ import datetime as dt
 engine=sqlalchemy.create_engine('mysql+pymysql://root:8551649@localhost:3306/stock_data')
 
 now=dt.datetime.now()
-df=yf.download('WFC', start='2024-01-01', end=now)
 
 #df.to_sql('wfc',engine)
 max_date=pd.read_sql('SELECT MAX(Date) FROM wfc',engine).values[0][0]
+
+df=yf.download('WFC', start=max_date, end=now)
 
 df[df.index > max_date].to_sql('wfc',engine,if_exists='append')
 
